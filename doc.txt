@@ -1,0 +1,64 @@
+craete database NAkshatra;
+use NAkshatra;
+Database changed
+mysql> create table physicians( id int(10), name varchar(10),primary key (name), password int(10)DEFAULT NULL);
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> insert into physicians values ('1232','Nakshatra','212');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select *from physicians;
++------+-----------+----------+
+| id   | name      | password |
++------+-----------+----------+
+| 1232 | Nakshatra |      212 |
++------+-----------+----------+
+1 row in set (0.00 sec)
+ insert into patients values ('1','81470444','K','kevin','male','20Aug1992','Hubli','keshwapur','Nakshatra');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select *from patients;+-----------+------------+------------+-----------+------+-------------+--------------+------------------+-----------+
+| idPatient | PersonalNo | SecondNmae | FirstName | Sex  | DateOfBirth | PlaceOfBirth | PlaceOfResidence | physician |
++-----------+------------+------------+-----------+------+-------------+--------------+------------------+-----------+
+|         1 |   81470444 | K          | kevin     | male | 20Aug1992   | Hubli        | keshwapur        | Nakshatra |
++-----------+------------+------------+-----------+------+-------------+--------------+------------------+-----------+
+1 row in set (0.00 sec)
+mysql> create table bonestage( id varchar(10), primary key (id), name varchar(10),stage varchar(10));                                         Query OK, 0 rows affected (0.39 sec)
+
+mysql> insert into bonestage values ('1a','elbow','3rd');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select *from bonestage;
++----+-------+-------+
+| id | name  | stage |
++----+-------+-------+
+| 1a | elbow | 3rd   |
++----+-------+-------+
+1 row in set (0.00 sec)
+create table bones( id varchar(10), bone varchar(10), stage varchar(10), primary key(stage),text varchar(10)); 
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> insert into bones values ('a.101','elbow','3rd','fractured');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from bones;
++-------+-------+-------+-----------+
+| id    | bone  | stage | text      |
++-------+-------+-------+-----------+
+| a.101 | elbow | 3rd   | fractured |
++-------+-------+-------+-----------+
+1 row in set (0.00 sec)
+create table consultation( IdConsultation int(10), PersonalNo int(10), foreign key(PersonalNo) references patients(PersonalNo), DateOfConsultation varchar(10), Weight int(10), Height int(10), diagnostic varchar(10), foreign key(diagnostic) references bones(stage), selectedbones varchar(10), RealScore int(10), MaturityScore int(10), BoneAge int(10), physician varchar(10), foreign key(physician) references physicians(name));
+Query OK, 0 rows affected (0.41 sec)
+insert into consultation values ('101','81470444','12oct2018','105','5.8','3rd','elbow','48','70','25','Nakshatra');
+Query OK, 1 row affected (0.04 sec)
+select * from consultation;
++----------------+------------+--------------------+--------+--------+------------+---------------+-----------+---------------+---------+-----------+
+| IdConsultation | PersonalNo | DateOfConsultation | Weight | Height | diagnostic | selectedbones | RealScore | MaturityScore | BoneAge | physician |
++----------------+------------+--------------------+--------+--------+------------+---------------+-----------+---------------+---------+-----------+
+|            101 |   81470444 | 12oct2018          |    105 |      6 | 3rd        | elbow         |        48 |            70 |      25 | Nakshatra |
++----------------+------------+--------------------+--------+--------+------------+---------------+-----------+---------------+---------+-----------+
+1 row in set (0.00 sec)
+
+
+
